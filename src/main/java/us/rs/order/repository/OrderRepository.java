@@ -1,9 +1,11 @@
 package us.rs.order.repository;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import us.rs.order.pojo.Order;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -28,10 +30,13 @@ public class OrderRepository {
 //method add remove get
 
 
-    public static Map<String, Order> orders;
+    Order order;
 
-    public Order add(String frIdString,Order order){//order
-       return orders.put(frIdString,order);
+    public static Map<String, Order> orders=new HashMap<>();
+
+    public Map<String,Order> add(String frIdString,Order order){//order
+       orders.put(frIdString,order);
+       return orders;
 
     }
     public void remove(String frIdString){
