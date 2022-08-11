@@ -4,6 +4,7 @@ package us.rs.order.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import us.rs.order.aop.LoggerExecutionTime;
 import us.rs.order.pojo.Order;
 import us.rs.order.service.OrderService;
 import us.rs.order.service.OrderServiceImpl;
@@ -35,5 +36,17 @@ public class OrderControllers {
     public Order searchingOrder(@PathVariable String frId){
         return orderService.readOrderByFrId(frId);
     }
+
+    @RequestMapping(path = "/hello")
+    @LoggerExecutionTime
+    public String hello() {
+        return "hello";
+    }
+
+//    @PostMapping("hello/{frId}")
+//    @CreateOrder
+//    public Order creatingOrder(@PathVariable String frId, @RequestBody Order order){
+//
+//    }
 
 }
