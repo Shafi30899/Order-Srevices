@@ -5,6 +5,7 @@ package us.rs.order.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import us.rs.order.aop.LoggerExecutionTime;
+import us.rs.order.exceptions.OrderNotFoundException;
 import us.rs.order.pojo.Order;
 import us.rs.order.service.OrderService;
 import us.rs.order.service.OrderServiceImpl;
@@ -24,17 +25,29 @@ public class OrderControllers {
 
     @PutMapping(value="/orders/{frId}")
     public Order updatingOrder(@PathVariable String frId, @RequestBody Order order){
-        return orderService.updateOrderByFrId(frId,order);
+        try {
+            return orderService.updateOrderByFrId(frId,order);
+        } catch (OrderNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @DeleteMapping(value = "/orders/{frId}")
-    public void deletingOrder(@PathVariable String frId){
-        orderService.deleteOrderByFrId(frId);
+    public void deletingOrder(@PathVariable String frId) {
+        try {
+            orderService.deleteOrderByFrId(frId);
+        } catch (OrderNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @GetMapping(value = "/orders/{frId}")
     public Order searchingOrder(@PathVariable String frId){
-        return orderService.readOrderByFrId(frId);
+        try {
+            return orderService.getOrderByFrId(frId);
+        } catch (OrderNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @RequestMapping(path = "/hello")
@@ -43,10 +56,5 @@ public class OrderControllers {
         return "hello";
     }
 
-//    @PostMapping("hello/{frId}")
-//    @CreateOrder
-//    public Order creatingOrder(@PathVariable String frId, @RequestBody Order order){
-//
-//    }
 
 }

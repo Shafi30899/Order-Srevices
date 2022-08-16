@@ -19,48 +19,29 @@ import java.util.Arrays;
 @Component
 public class AddingLog {
 
+        Logger log = LoggerFactory.getLogger(AddingLog.class);
+        @Pointcut(value="execution(* us.rs.order.*.*.*(..))")
+        public void myPointcut(){
+        }
+
+        @Around("myPointcut()")
+        public Object applicationLog(ProceedingJoinPoint proceedingJoinPoint)throws Throwable{
+            ObjectMapper mapper=new ObjectMapper();
+
+            String methodName=proceedingJoinPoint.getSignature().getName();
+            String className=proceedingJoinPoint.getTarget().getClass().toString();
+            Object[]array=proceedingJoinPoint.getArgs();
+            log.info("method invoked"+className+":"+methodName+"()"+"arguments: "+mapper.writeValueAsString(array));
+            Object object=proceedingJoinPoint.proceed();
+            log.info(className+":"+methodName+"()"+"Response:" +mapper.writeValueAsString(object));
+            return object;
 
 
-    @Around("@annotation(us.rs.order.aop.Log)")
-    public void createOrder(ProceedingJoinPoint joinPoint) throws Throwable{
-        Object value=null;
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        System.out.println("Method args values:");
-        Arrays.stream(joinPoint.getArgs())
-                .forEach(o -> System.out.println("arg value: " + o.toString()));
 
-        joinPoint.proceed();
-
-        value=joinPoint.proceed();
-        System.out.println("Returning Order Data : "+value);
-
-
-
-
-//        Logger log = LoggerFactory.getLogger(AddingLog.class);
-//        @Pointcut(value="execution(* us.rs.order.*.*.*(..))")
-//        public void myPointcut(){
-//        }
-//
-//        @Around("myPointcut()")
-//        public Object applicationLog(ProceedingJoinPoint pjp)throws Throwable{
-//            ObjectMapper mapper=new ObjectMapper();
-//
-//            String methodName=pjp.getSignature().getName();
-//            String className=pjp.getTarget().getClass().toString();
-//            Object[]array=pjp.getArgs();
-//            log.info("method invoked"+className+":"+methodName+"()"+"arguments: "+mapper.writeValueAsString(array));
-//            Object object=pjp.proceed();
-//            log.info(className+":"+methodName+"()"+"Response:"
-//                    +mapper.writeValueAsString(object));
-//            return object;
-//
-//
-//
-//        }
+        }
 
 
 
     }
 
-}
+

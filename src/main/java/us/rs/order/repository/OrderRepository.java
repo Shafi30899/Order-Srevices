@@ -13,34 +13,7 @@ import java.util.Map;
 
 @Repository
 public class OrderRepository {
-//    OrderRepository orderRepositoryObj=new OrderRepository();
-//    Order orderObj=new Order();
-//    @Getter
-//    @Setter
-//    private String key;
-//    @Getter
-//    @Setter
-//    private String index;
-
-//    @Getter
-//    @Setter
-//    public Map orders=new HashMap<>();
-//    orders.put
-
-//    public static map string ,order
-
-//method add remove get
-
-
   public static Map<String, Order> orders=new HashMap<>();
-
-//    public Map<String,Order> add(String frIdString,Order order){//order
-//       orders.put(frIdString,order);
-//       return orders;
-//
-//    }
-
-//
     @Log
     public Order add(String frIdString,Order order){//order
        return orders.put(frIdString,order);
