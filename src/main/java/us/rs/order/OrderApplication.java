@@ -11,16 +11,5 @@ public class OrderApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrderApplication.class, args);
 
-
-//		@LoggerExecutionTime
-//		public void serve() throws InterruptedException{
-//			Thread.sleep(2000);
-//		}
 	}
-
-//	@LoggerExecutionTime
-//	public void serve() throws InterruptedException{
-//		Thread.sleep(2000);
-//	}
-
 }

@@ -69,4 +69,12 @@ public class Order {
     @Setter
     List<OrderAlerts> orderAlerts;
 
+
+    public String getFrId() {
+        return frId;
+    }
+
+    public void setFrId(String frId) {
+        this.frId = frId;
+    }
 }
