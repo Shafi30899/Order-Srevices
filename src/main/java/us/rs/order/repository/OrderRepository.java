@@ -4,7 +4,8 @@ package us.rs.order.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import us.rs.order.aop.Log;
-import us.rs.order.pojo.Order;
+import us.rs.order.beans.Order;
+//import us.rs.order.pojo.Order;
 
 import java.util.HashMap;
 import java.util.Map;
