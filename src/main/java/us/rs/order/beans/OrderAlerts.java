@@ -18,8 +18,9 @@ import java.util.Date;
 public class OrderAlerts {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oa_gen")
-    @SequenceGenerator(name="oa_gen", sequenceName = "oa_seq",initialValue = 50,allocationSize=50)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "oa_gen")
+//    @SequenceGenerator(name="oa_gen", sequenceName = "oa_seq",initialValue = 50,allocationSize=50)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String createdBy;
     private String updatedBy;
@@ -27,11 +28,16 @@ public class OrderAlerts {
     private String alertDescription;
     private boolean isActive;
     private boolean reProcessable;
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    @JsonIgnore
+//    @JoinColumn(name = "fr_Id", referencedColumnName = "frId")
+//    private Order orders;
+
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonIgnore
-    @JoinColumn(name = "fr_Id", referencedColumnName = "frId")
+    @JoinColumn(name = "orderid", referencedColumnName = "id")
     private Order orders;
-
     @Override
     public String toString() {
         return "OrderAlerts{" +

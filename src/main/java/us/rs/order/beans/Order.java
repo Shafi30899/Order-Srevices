@@ -24,9 +24,11 @@ public class Order implements Serializable {
     private String createdBy;
     private String updatedBy;
     private String orderId;
-    private Integer storeNumber;
-    private Status orderStatus;
+    private int storeNumber;
+//    private Status orderStatus;
+    private String orderStatus;
     private String orderType;
+
     private String notes;
 
     @OneToMany(

@@ -53,36 +53,31 @@ public class OrderLine implements Serializable {
     private long id;
     private String createdBy;
     private String updatedBy;
-    private Integer lineNumber;
-    private Integer frLineId;
-    private Status lineStatus;
+    private int lineNumber;
+    private int frLineId;
+    private String lineStatus;
 //    @ManyToOne
 //    @JsonIgnore
 //    @JoinTable(name = "Item_OrderLine",joinColumns = @JoinColumn(name = "id_Orderline"),referencedColumnName = "id" inverseJoinColumns =@JoinColumn(name = "Id_item",referencedColumnName = "itemId") )
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-//    @JoinTable(name = "Item_OrderLine",joinColumns ={@JoinColumn(name = "id")},
-//            inverseJoinColumns ={@JoinColumn(name = "orderLineList")})
-    @JoinColumn(name = "itemId")
-    private Item item;
+
     private String carrier;
     private String shipMode;
-    private Integer sourceFacility;
-    private Integer orderedQuantity;
-    private Integer shippedQuantity;
-    private Integer invoicedQuantity;
-    private Integer cancelledQuantity;
-    private Integer availableQuantity;
+    private int sourceFacility;
+    private int orderedQuantity;
+    private int shippedQuantity;
+    private int invoicedQuantity;
+    private int cancelledQuantity;
+    private int availableQuantity;
 
     private boolean isCancelable;
-    private Date cancelTimeStamp;
+    private String cancelTimeStamp;
     private String cancelReason;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonIgnore
-    @JoinColumn(name = "fr_Id", referencedColumnName = "frId")
+    @JoinColumn(name = "orderid", referencedColumnName = "id")
     private Order orders;
-
 
 
     @OneToMany(
@@ -91,6 +86,12 @@ public class OrderLine implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Packages> packages;
+    @ManyToOne(cascade = {CascadeType.MERGE})
+//    @JoinTable(name = "Item_OrderLine",joinColumns ={@JoinColumn(name = "id")},
+//            inverseJoinColumns ={@JoinColumn(name = "orderLineList")})
+    @JoinColumn(name = "itemid", referencedColumnName = "id")
+    private Item item;
+
 
 
     @Override
@@ -103,6 +104,7 @@ public class OrderLine implements Serializable {
                 ", frLineId=" + frLineId +
                 ", lineStatus=" + lineStatus +
                 ", item" + item +
+
                 ", carrier='" + carrier + '\'' +
                 ", shipMode='" + shipMode + '\'' +
                 ", sourceFacility=" + sourceFacility +

@@ -39,7 +39,7 @@ public class OrderEvents {
     private String eventDescription;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonIgnore
-    @JoinColumn(name = "fr_Id", referencedColumnName = "frId")
+    @JoinColumn(name = "orderid", referencedColumnName = "id")
     private Order orders;
 
 

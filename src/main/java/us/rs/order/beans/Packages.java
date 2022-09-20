@@ -40,25 +40,25 @@ public class Packages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date createTimeStamp;
-    private Date updateTimeStamp;
+    private String createTimeStamp;
+    private String updateTimeStamp;
     private String createdBy;
     private String updatedBy;
 //    private String frId;
-    private Integer quantity;
+    private int quantity;
     private String packageId;
-    private Date shippedTimeStamp;
+    private String shippedTimeStamp;
     private String trackingNumber;
     private String carrier;
-    @Convert(converter = AttributeConvertorMap.class)
-    private Map<String,String> attribute;
+//    @Convert(converter = AttributeConvertorMap.class)
+//    private Map<String,String> attribute;
+    private String attribute;
     private String serviceLevel;
-//    private Object attributes;
 
 
     @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     @JsonIgnore
-    @JoinColumn(name = "fr_Id", referencedColumnName = "id")
+    @JoinColumn(name = "orderlines", referencedColumnName = "id")
     private OrderLine orderLines;
 
     @Override

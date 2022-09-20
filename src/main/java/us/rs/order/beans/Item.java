@@ -22,22 +22,25 @@ import java.util.List;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int itemId;
+    private int id;
     private String itemName;
-    @OneToOne(cascade = CascadeType.ALL)
-    private PriceDetails price;
+
     private String itemDescription;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "priceid", referencedColumnName = "id")
+    private PriceDetails priceDetails;
 
-    @OneToMany(mappedBy = "item",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+
+    @OneToMany(mappedBy = "item",cascade = CascadeType.MERGE)
     @JsonIgnore
-    private List<OrderLine> orderLineList=new ArrayList<>();
+    private List<OrderLine> orderLines;
 
 
     @Override
     public String toString() {
         return "item{" +
-                "itemId=" + itemId +
+                "itemId=" + id +
                 ", itemName='" + itemName + '\'' +
                 ", itemDescription='" + itemDescription + '\'' +
                 '}';

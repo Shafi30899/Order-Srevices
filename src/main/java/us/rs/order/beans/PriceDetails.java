@@ -16,15 +16,19 @@ import javax.persistence.*;
 public class PriceDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int priceId;
+    private int id;
     private int retailPrice;
     private int sellingPrice;
     private int shippingCharges;
 
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "itemid", referencedColumnName = "id")
+//    private Item item;
+
     @Override
     public String toString() {
         return "PriceDetails{" +
-                "priceId=" + priceId +
+                "priceId=" + id +
                 ", retailPrice=" + retailPrice +
                 ", sellingPrice=" + sellingPrice +
                 ", shippingCharges=" + shippingCharges +
