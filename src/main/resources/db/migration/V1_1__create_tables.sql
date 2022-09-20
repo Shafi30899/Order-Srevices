@@ -1,70 +1,70 @@
-CREATE TABLE pricedetails(
+CREATE TABLE price_details(
 id INT  PRIMARY KEY AUTO_INCREMENT
-,retailprice INT NOT NULL
-,sellingprice INT NOT NULL
-,shippingcharges INT NOT NULL
+,retail_price INT NOT NULL
+,selling_price INT NOT NULL
+,shipping_charges INT NOT NULL
 );
 
 CREATE TABLE item(
  id INT PRIMARY KEY AUTO_INCREMENT
-,itemname VARCHAR(20)
-,itemdescription VARCHAR(50)
+,item_name VARCHAR(20)
+,item_description VARCHAR(50)
 ,priceid INT UNIQUE
-,FOREIGN KEY (priceid)REFERENCES pricedetails(id)
+,FOREIGN KEY (priceid)REFERENCES price_details(id)
 );
 
 CREATE TABLE orders(
   id         BIGINT PRIMARY KEY AUTO_INCREMENT
-,createdBy   VARCHAR(20) NOT NULL
-,updatedBy   VARCHAR(20) NOT NULL
-,orderId     VARCHAR(20) NOT NULL
-,frId        VARCHAR(20) NOT NULL
-,storeNumber INT  NOT NULL
-,orderStatus VARCHAR(20) NOT NULL
-,orderType   VARCHAR(20) NOT NULL
+,created_by   VARCHAR(20) NOT NULL
+,updated_by   VARCHAR(20) NOT NULL
+,order_id     VARCHAR(20) NOT NULL
+,fr_id        VARCHAR(20) NOT NULL
+,store_number INT  NOT NULL
+,order_status VARCHAR(20) NOT NULL
+,order_type   VARCHAR(20) NOT NULL
 ,notes       VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE orderalerts(
+CREATE TABLE order_alerts(
   id               BIGINT PRIMARY KEY AUTO_INCREMENT
-,createdBy        VARCHAR(20) NOT NULL
-,updatedBy        VARCHAR(20) NOT NULL
-,alertType        VARCHAR(20) NOT NULL
-,alertDescription VARCHAR(50) NOT NULL
-,reProcessable    BOOLEAN  NOT NULL
-,isactive           BOOLEAN  NOT NULL
+,created_by        VARCHAR(20) NOT NULL
+,updated_by        VARCHAR(20) NOT NULL
+,alert_type        VARCHAR(20) NOT NULL
+,alert_description VARCHAR(50) NOT NULL
+,re_processable    BOOLEAN  NOT NULL
+,is_active           BOOLEAN  NOT NULL
 ,orderid BIGINT
 ,FOREIGN KEY (orderid)REFERENCES orders(id)
 );
 
-CREATE TABLE orderevents(
+CREATE TABLE order_events(
   id               BIGINT PRIMARY KEY AUTO_INCREMENT
-,createdBy        VARCHAR(20) NOT NULL
-,updatedBy        VARCHAR(20) NOT NULL
-,eventName        VARCHAR(20) NOT NULL
-,eventDescription VARCHAR(50) NOT NULL
+,created_by        VARCHAR(20) NOT NULL
+,updated_by        VARCHAR(20) NOT NULL
+,event_name        VARCHAR(20) NOT NULL
+,event_description VARCHAR(50) NOT NULL
 ,orderid BIGINT
 ,FOREIGN KEY (orderid)REFERENCES orders(id)
 );
 
-CREATE TABLE orderline(
+CREATE TABLE order_line(
   id                BIGINT PRIMARY KEY AUTO_INCREMENT
-,createdBy         VARCHAR(20) NOT NULL
-,updatedBy         VARCHAR(20) NOT NULL
-,lineNumber        INT  NOT NULL
-,frLineId          INT  NOT NULL
-,lineStatus        VARCHAR(20) NOT NULL
+,created_by         VARCHAR(20) NOT NULL
+,updated_by         VARCHAR(20) NOT NULL
+,line_number        INT  NOT NULL
+,fr_line_id          INT  NOT NULL
+,line_status        VARCHAR(20) NOT NULL
 ,carrier           VARCHAR(20) NOT NULL
-,shipMode          VARCHAR(20) NOT NULL
-,sourceFacility    INT  NOT NULL
-,orderedQuantity   INT  NOT NULL
-,shippedQuantity   INT  NOT NULL
-,invoicedQuantity  INT  NOT NULL
-,cancelledQuantity INT  NOT NULL
-,availableQuantity INT  NOT NULL
-,cancelTimeStamp   VARCHAR(30)
-,cancelReason      VARCHAR(30) NOT NULL
-,iscancelable        BOOLEAN  NOT NULL
+,ship_mode          VARCHAR(20) NOT NULL
+,source_facility    INT  NOT NULL
+,ordered_quantity   INT  NOT NULL
+,shipped_quantity   INT  NOT NULL
+,invoiced_quantity  INT  NOT NULL
+,cancelled_quantity INT  NOT NULL
+,available_quantity INT  NOT NULL
+,cancel_time_stamp   VARCHAR(30)
+,cancel_reason      VARCHAR(30) NOT NULL
+,is_cancelable        BOOLEAN  NOT NULL
 ,orderid BIGINT
 ,itemid INT
 ,FOREIGN KEY (orderid)REFERENCES orders(id)
@@ -74,19 +74,19 @@ CREATE TABLE orderline(
 
 CREATE TABLE packages(
   id               BIGINT PRIMARY KEY AUTO_INCREMENT
-,createTimeStamp  VARCHAR(30)
-,updateTimeStamp  VARCHAR(30)
-,createdBy        VARCHAR(5) NOT NULL
-,updatedBy        VARCHAR(3) NOT NULL
+,create_time_stamp  VARCHAR(30)
+,update_time_stamp  VARCHAR(30)
+,created_by        VARCHAR(5) NOT NULL
+,updated_by        VARCHAR(3) NOT NULL
 ,quantity         INT  NOT NULL
-,packageId        VARCHAR(10) NOT NULL
-,shippedTimeStamp VARCHAR(30)
-,trackingNumber   VARCHAR(20) NOT NULL
+,package_id        VARCHAR(10) NOT NULL
+,shipped_time_stamp VARCHAR(30)
+,tracking_number   VARCHAR(20) NOT NULL
 ,carrier          VARCHAR(20) NOT NULL
-,serviceLevel     VARCHAR(20) NOT NULL
+,service_level     VARCHAR(20) NOT NULL
 ,attribute VARCHAR(50) NOT NULL
 ,orderlines BIGINT
-,FOREIGN KEY (orderlines)REFERENCES orderline(id)
+,FOREIGN KEY (orderlines)REFERENCES order_line(id)
 );
 
 

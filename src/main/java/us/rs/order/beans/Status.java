@@ -5,3 +5,4 @@ public enum Status {
     SHIPPED,
     CANCELLED;
 }
+//partially shipped and cancelled
